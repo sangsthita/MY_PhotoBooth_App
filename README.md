@@ -10,7 +10,13 @@ git push -u origin main
 
 
 PUSH CHANGES IN GIT :
-git add .
-git status
+Example Workflow:
+Modify or create new files in your project.
 
-git push origin main
+Run git status to see your changes.
+
+Stage changes with git add . or git add <specific-files>.
+
+Commit with git commit -m "Descriptive message".
+
+Push your changes with git push origin main.

@@ -9,18 +9,24 @@ SAVE_DIR = "photos"
 os.makedirs(SAVE_DIR, exist_ok=True)
 
 # Function to add overlay (e.g., hat or heart)
-def add_overlay(image, overlay_path, face_landmarks):
-    overlay = Image.open(overlay_path).convert("RGBA")
+def add_overlay(img_with_overlay, overlay_path, face_location):
+    # Get face coordinates: left, top, right, bottom
+    left, top, right, bottom = face_location
     
-    # Extract face coordinates
-    (left, top, right, bottom) = face_landmarks
+    # Calculate width and height
+    width = right - left
+    height = bottom - top
     
-    # Resize overlay to fit the face
-    overlay = overlay.resize((right-left, bottom-top))
+    # Validate dimensions
+    if width > 0 and height > 0:
+        overlay = overlay.resize((width, height))
+    else:
+        print(f"Invalid overlay dimensions: width={width}, height={height}")
+        return img_with_overlay
     
-    # Paste overlay on top of the face
-    image.paste(overlay, (left, top), overlay)
-    return image
+    # Additional code to apply the overlay here
+    # ...
+    return img_with_overlay
 
 # Streamlit layout
 st.title("Streamlit Photobooth App 🎉")
