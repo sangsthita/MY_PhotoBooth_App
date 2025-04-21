@@ -55,10 +55,10 @@ if uploaded_file is not None:
         # Apply filters/overlay (e.g., sunglasses)
         filter_choice = st.selectbox("Choose a filter", ["None", "Sunglasses", "Hat"])
         
-        if filter_choice == "Sunglasses":
-            overlay_path = "path_to_sunglasses_image.png"
-        elif filter_choice == "Hat":
-            overlay_path = "path_to_hat_image.png"
+        if filter_choice == "Hat":
+            overlay_path = "'/Users/sangsthitapanda/Desktop/Photobooth App/hat.png'"
+        elif filter_choice == "Heart":
+            overlay_path = "'/Users/sangsthitapanda/Desktop/Photobooth App/heart.png'"
         else:
             overlay_path = None
         
