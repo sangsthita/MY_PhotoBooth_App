@@ -1,6 +1,5 @@
 import streamlit as st
 import numpy as np
-import cv2
 import face_recognition
 from PIL import Image
 import os
@@ -26,14 +25,15 @@ def add_overlay(image, overlay_path, face_landmarks):
 # Streamlit layout
 st.title("Streamlit Photobooth App 🎉")
 
-# Upload image
-uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+# Use Streamlit's camera input for real-time face detection
+camera_input = st.camera_input("Capture Image")
 
-if uploaded_file is not None:
-    image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image", use_column_width=True)
+if camera_input is not None:
+    # Convert captured image to PIL image
+    image = Image.open(camera_input)
+    st.image(image, caption="Captured Image", use_column_width=True)
     
-    # Convert uploaded image to numpy array for face recognition
+    # Convert the image to numpy array for face recognition
     img_array = np.array(image)
     
     # Detect faces in the image using face_recognition
@@ -48,7 +48,8 @@ if uploaded_file is not None:
         
         for face_location in face_locations:
             top, right, bottom, left = face_location
-            cv2.rectangle(img_with_faces, (left, top), (right, bottom), (0, 255, 0), 2)
+            # Draw rectangles to mark faces (no cv2, just numpy)
+            img_with_faces[top:bottom, left:right] = [0, 255, 0]
         
         st.image(img_with_faces, caption="Face Detected", use_column_width=True)
         
@@ -56,9 +57,9 @@ if uploaded_file is not None:
         filter_choice = st.selectbox("Choose a filter", ["None", "Sunglasses", "Hat"])
         
         if filter_choice == "Hat":
-            overlay_path = "'/Users/sangsthitapanda/Desktop/Photobooth App/hat.png'"
+            overlay_path = "'/Users/sangsthitapanda/Desktop/Photobooth App/hat.png'"  # Update with actual path
         elif filter_choice == "Heart":
-            overlay_path = "'/Users/sangsthitapanda/Desktop/Photobooth App/heart.png'"
+            overlay_path = "'/Users/sangsthitapanda/Desktop/Photobooth App/heart.png'"  # Update with actual path
         else:
             overlay_path = None
         
@@ -79,6 +80,7 @@ if uploaded_file is not None:
             st.success(f"Photo saved as {save_path}")
     else:
         st.write("No faces detected. Please try again!")
+
 
 
 

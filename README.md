@@ -7,3 +7,9 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/sangsthita/MY_PhotoBooth_App.git
 git push -u origin main
+
+
+PUSH CHANGES IN GIT :
+git add .
+git commit -m "Added filters and overlays to the Photobooth app"
+git push origin main
