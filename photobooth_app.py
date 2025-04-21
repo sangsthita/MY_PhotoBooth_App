@@ -8,8 +8,9 @@ import os
 st.set_page_config(layout="centered")
 st.title("📸 Streamlit AI-Powered PhotoBooth")
 
-# Load Haar cascade for face detection
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+# Fallback method to load Haar cascade for face detection
+cascade_path = os.path.join(cv2.__file__.replace('cv2.cpython-<version>.so', ''), 'data', 'haarcascades', 'haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier(cascade_path)
 
 # Load overlay image (heart)
 heart_overlay = cv2.imread("heart.png", cv2.IMREAD_UNCHANGED)  # Add transparent heart.png in the same folder
@@ -104,4 +105,7 @@ if captured_image:
         st.write("Expression: 😀 Likely Happy (placeholder)")
     else:
         st.write("Multiple faces detected. Group expression: 😊 Positive (placeholder)")
+
+
+
 
