@@ -11,5 +11,6 @@ git push -u origin main
 
 PUSH CHANGES IN GIT :
 git add .
-git commit -m "Added filters and overlays to the Photobooth app"
+git status
+
 git push origin main

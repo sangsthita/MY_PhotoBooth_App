@@ -8,7 +8,7 @@ import os
 SAVE_DIR = "photos"
 os.makedirs(SAVE_DIR, exist_ok=True)
 
-# Function to add overlay (e.g., sunglasses)
+# Function to add overlay (e.g., hat or heart)
 def add_overlay(image, overlay_path, face_landmarks):
     overlay = Image.open(overlay_path).convert("RGBA")
     
@@ -53,13 +53,13 @@ if camera_input is not None:
         
         st.image(img_with_faces, caption="Face Detected", use_column_width=True)
         
-        # Apply filters/overlay (e.g., sunglasses)
-        filter_choice = st.selectbox("Choose a filter", ["None", "Sunglasses", "Hat"])
+        # Apply filters/overlay (e.g., hat or heart)
+        filter_choice = st.selectbox("Choose a filter", ["None", "Hat", "Heart"])
         
         if filter_choice == "Hat":
-            overlay_path = "'/Users/sangsthitapanda/Desktop/Photobooth App/hat.png'"  # Update with actual path
+            overlay_path = "/Users/sangsthitapanda/Desktop/Photobooth App/hat.png"  # Update with actual path
         elif filter_choice == "Heart":
-            overlay_path = "'/Users/sangsthitapanda/Desktop/Photobooth App/heart.png'"  # Update with actual path
+            overlay_path = "/Users/sangsthitapanda/Desktop/Photobooth App/heart.png"  # Update with actual path
         else:
             overlay_path = None
         
